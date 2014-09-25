@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Rooms";
+}
+
+
+<div class="row">
+    <img src="" @*todo need to figure out how to get a gravatar image*@ class="grp-gavatar">
+    <div style="margin-left: 120px;">
+        <p><strong>User Name @*todo need to put in user name*@</strong></p>
+        <p>user email @*todo add user email*@</p>
+        @* todo start of twitter name if they have one *@
+        <p><a href="https://twitter.com" target="_blank">@*todo add twitter name if they have one*@</a></p>
+        @* todo end of twitter name if the have one *@
+    </div>
+</div>
+
+
+
+
+<div class="row" style="padding-top:25px;">
+    <div class="col-md-6" style="padding:0;">
+        <form role="form" action="/api/GroopsAPIRooms" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" name="name" placeholder="Room Name" required />
+                <input type="text" name="CreatorUserId" id="userId" value='@ViewData["UserId"]' />
+                
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Create Room</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="created"></div>
+
+<div class="row">
+    <h3>Available Rooms</h3>
+    @*todo  do this only if the rooms count is greater than 0
+        otherwise display a message that none are available
+         I suppose that will be stored in a database *@
+    <table id="roomsTable" class="table table-striped table-bordered table-condensed">
+        <thead>
+            <tr>
+                <td width="100%">Room</td>
+                <td class="centered">Members</td>
+                <td class="centered">Join</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+
+    </table>
+    @*todo  otherwise we will display a message *@
+    <p><em class="text-muted">No rooms available right now</em></p>
+    @*todo end of the else *@
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+
+            $("form").submit(function (event) {
+                $.ajax({
+                    data: $(this).serialize(),
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    success: function (response) {
+                        $("#created").html(response);
+                        //now that we have the new userId, we can redirect to a new page
+                        //window.location.href = "/home/rooms/?userID=" + response;
+                        //todo we need to call the get all rooms routine
+                        callToGetAllRooms();
+                    }
+                });
+                return false;
+            })
+
+
+
+            function callToGetAllRooms() {
+                //$.ajax({
+                //    url: "/api/GroopsAPIRooms",
+                //    type: "GET",
+                //    success: function (response) {
+                //        alert("here");
+                //        populateAllRooms(response);
+                //    }
+                //});
+
+                $.ajax({
+                    datatype: "json",
+                    url: "/api/GroopsAPIRooms",
+                    type: "GET",
+                }).done(function (data) { populateAllRooms(data); }).error(function (data) {
+                    //todo clean up error message
+                    debugger;
+                    alert("error"); var cat = data;
+                });
+
+
+
+            }
+
+
+            function populateAllRooms(roomsData) {
+                
+                //first clear out any rooms that may already be in the list
+                //we are doing this because the user may have just added a new room and
+                //we need to redraw the list
+
+                for (var idx = 0; idx < roomsData.length; idx++) {
+
+                    var newRowStr = "<tr><td width='100%'>" + roomsData[idx].Name + "</td>";
+                    //todo room name
+                    //todo room count
+                   // debugger;
+                    newRowStr += "<td class='centered'>" + 0 + "</td>";
+                    //todo room id and userid in the query string
+                    
+                    newRowStr += "<td class='centered'><a href='" + "/home/chat/" + roomsData[idx].ID + "?userId=" + $("#userId").val() + "' class='btn btn-primary btn-sm'>Join</a></td></tr>";
+
+
+                    $('#roomsTable > tbody').append(newRowStr);
+
+
+                }
+
+
+                
+                
+            }
+
+            callToGetAllRooms();
+    </script>
+}

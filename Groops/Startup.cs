@@ -1,5 +1,6 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
+using Microsoft.Owin;
+//[assembly: OwinStartup(typeof(SignalRChat.StartUp))]
 
 [assembly: OwinStartupAttribute(typeof(Groops.Startup))]
 namespace Groops
@@ -8,7 +9,8 @@ namespace Groops
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            //ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

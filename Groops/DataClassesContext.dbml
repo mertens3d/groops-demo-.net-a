@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Groops_db" Class="DataClassesContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=zneb1r5obr.database.windows.net,1433;Initial Catalog=Groops_db;User ID=GroopsChatSignalR;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Groops_dbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Rooms" Member="GroopsRooms">
+    <Type Name="GroopsRoom">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatorUserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Room_Message" Member="GroopsMessages" Storage="_Messages" ThisKey="ID" OtherKey="RoomId" Type="GroopsMessages" />
+      <Association Name="Room_User" Member="GroopsUsers" Storage="_Users" ThisKey="ID" OtherKey="RoomID" Type="GroopsUser" />
+      <Association Name="User_Room" Member="User" ThisKey="CreatorUserId" OtherKey="ID" Type="GroopsUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Messages" Member="GroopsMessages">
+    <Type Name="GroopsMessages">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoomId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Room_Message" Member="GroopsRoom" Storage="_Room" ThisKey="RoomId" OtherKey="ID" Type="GroopsRoom" IsForeignKey="true" />
+      <Association Name="User_Message" Member="GroopsUser" Storage="_User" ThisKey="UserId" OtherKey="ID" Type="GroopsUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="GroopsUsers">
+    <Type Name="GroopsUser">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Twitter" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RoomID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="User_Room" Member="GroopsRooms" Storage="_Rooms" ThisKey="ID" OtherKey="CreatorUserId" Type="GroopsRoom" />
+      <Association Name="User_Message" Member="GroopsMessages" Storage="_Messages" ThisKey="ID" OtherKey="UserId" Type="GroopsMessages" />
+      <Association Name="Room_User" Member="Room" ThisKey="RoomID" OtherKey="ID" Type="GroopsRoom" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

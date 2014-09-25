@@ -1,0 +1,51 @@
+﻿<div id="room">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <a href="/main" class="btn btn-sm btn-default" title="Back to list"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <span class="grp-room-name">@ViewData["roomName"] ToDo attach css</span>
+    </div>
+
+    <div class="body">
+        <table id="messages" class="table table-striped">
+            <tbody>
+                @* todo add existing comments here *@
+
+                <tr>
+                    <td>
+                        <img src="author.img" align="Left" class="grp-gravatar" />
+                        This is the message content
+                        <br /><span class="name">todo authors name</span>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="compose">
+    <div class="input-group">
+        <input type="text" class="form-control" id="message" name="message" placeholder="Type message..." />
+        <span class="input-group-btn">
+            <button id="sendmessage" class="btn btn-success" type="submit">Send</button>
+        </span>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <input type="hidden" id="displayname" />
+
+    <input type="text" id="roomId" value="@ViewData["roomId"]" />
+    <input type="text" id="userId" value="@ViewData["userId"]" />
+
+    <ul id="discussion"></ul>
+</div>
+
+
+@section scripts{
+
+<script src="~/Scripts/GroopsChatPage.js"></script>
+
+}

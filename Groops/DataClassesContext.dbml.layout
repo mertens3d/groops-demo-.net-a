@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClassesContext">
+  <DataContextMoniker Name="/DataClassesContextDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6130afbf-fdf7-41a4-815a-509aea300db3" absoluteBounds="5, 2.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DataClassesContextDataContext/GroopsRoom" />
+      <nestedChildShapes>
+        <elementListCompartment Id="000b6f85-b523-445c-b12f-d19ca6ad77ff" absoluteBounds="5.015, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6e5992d7-ace4-43d9-a012-efdc75f6ad81" absoluteBounds="3.625, 4.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DataClassesContextDataContext/GroopsMessages" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0002cdf6-72df-4b09-a5cc-358fe97cf85c" absoluteBounds="3.64, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.3125 : 4.2612939453125); (5.3125 : 4.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClassesContextDataContext/GroopsRoom/Room_Message" />
+      <nodes>
+        <classShapeMoniker Id="6130afbf-fdf7-41a4-815a-509aea300db3" />
+        <classShapeMoniker Id="6e5992d7-ace4-43d9-a012-efdc75f6ad81" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="afb675d3-9874-4246-a159-a0664c837de1" absoluteBounds="8, 5.25, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DataClassesContextDataContext/GroopsUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f3eac759-d6f6-4b84-b4b4-98af9fcf17aa" absoluteBounds="8.015, 5.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9 : 5.25); (9 : 3.56814697265625); (7 : 3.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClassesContextDataContext/GroopsUser/User_Room" />
+      <nodes>
+        <classShapeMoniker Id="afb675d3-9874-4246-a159-a0664c837de1" />
+        <classShapeMoniker Id="6130afbf-fdf7-41a4-815a-509aea300db3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 5.88544840494792); (5.625 : 5.88544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClassesContextDataContext/GroopsUser/User_Message" />
+      <nodes>
+        <classShapeMoniker Id="afb675d3-9874-4246-a159-a0664c837de1" />
+        <classShapeMoniker Id="6e5992d7-ace4-43d9-a012-efdc75f6ad81" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.34375 : 4.2612939453125); (6.34375 : 6.80214680989583); (8 : 6.80214680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClassesContextDataContext/GroopsRoom/Room_User" />
+      <nodes>
+        <classShapeMoniker Id="6130afbf-fdf7-41a4-815a-509aea300db3" />
+        <classShapeMoniker Id="afb675d3-9874-4246-a159-a0664c837de1" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
